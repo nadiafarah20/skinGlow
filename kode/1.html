@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Beauty Store</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: rgb(247, 228, 235);
+    }
+
+    header {
+      background-color: palevioletred;
+      color: white;
+      text-align: center;
+      padding: 1em;
+    }
+
+    section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 1em;
+    }
+
+    .product {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      margin: 1em;
+      padding: 1em;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Online Beauty Store</h1>
+  </header>
+
+  <section id="products">
+    <div class="product">
+      <img src="./liptint.jpg" width="260" height="300" alt="Product 1">
+      <h2>Implora Jelly Tint</h2>
+      <p>Dengan kandungan vitamin E, peptides, serta omega 3,6,9 yang membantu mengurangi garis halus pada bibir, membuat bibir lebih bervolume, dan melembabkan bibir
+        Transferproof, tahan lama, kissproof.<br>
+      </p>
+      <p>Rp. 15000</p>
+      <button onclick="addToCart('Implora Jelly Tint', 15000)">Add to Cart</button>
+      <button onclick="removeFromCart('Implora Jelly Tint')">removeFromCart</button>
+    </div>
+
+    <div class="product">
+      <img src="./katalog_Crystalice_Eye_Srum_2.jpg" width="260" height="300" alt="Product 2">
+      <h2>Crystalice Eye Serum</h2>
+      <p>Kandungan Utama : <br>
+        <br>
+        - Licorice & Stevia Leaf Extract <br>
+        - Hyaluronic Acid <br>
+        - Peptide <br>
+        - Morus Alba <br>
+        <br>
+        Manfaat Utama : <br>
+        <br>
+        - Membantu mencerahkan lingkar hitam di sekitar mata <br>
+        - Menyamarkan kerutan di sekitar mata (sebagai anti aging) <br>
+        - Sebagai antioksidan dan meratakan warna kulit di sekitar mata<br>
+        </p>
+      <p>Rp. 35000</p>
+      <button onclick="addToCart('Crystalice Eye Serum', 35000)">Add to Cart</button>
+      <button onclick="removeFromCart('Crystalice Eye Serum')">removeFromCart</button>
+    </div>
+
+    <div class="product">
+        <img src="./wardah_wardah-exclusive-two-way-cake-natural-bedak_full02.webp" width="260" height="300" alt="Product 3">
+        <h2>Wardah Exclusive Two Way Cake</h2>
+        <p>Wardah Exclusive Two Way Cake merupakan produk bedak yang memiliki butiran powder yang sangat halus, menghasilkan makeup yang ringan, tahan lama dan terlihat natural.<br>
+            <br>
+        Manfaat : <br>
+        <br>
+            - Menutupi perbedaan warna wajah dan noda hitam<br>
+            - Menutupi pori-pori kulit secara menyeluruh<br>
+            - Perlindungan terhadap bahaya sinar matahari<br>
+            - Menyamarkan garis halus<br>
+            - Ringan natural tetapi covering<br>
+        </p>
+        <p>Rp. 98500</p>
+        <button onclick="addToCart('Wardah Exclusive Two Way Cake', 98500)">Add to Cart</button>
+        <button onclick="removeFromCart('Wardah Exclusive Two Way Cake')">removeFromCart</button>
+      </div>
+
+      <div class="product">
+        <img src="product4.jpg" alt="Product 4">
+        <h2>Product 4</h2>
+        <p>Description of Product 4.</p>
+        <p>Rp. 45000</p>
+        <button onclick="addToCart('Product 4', 45000)">Add to Cart</button>
+        <button onclick="removeFromCart('Product 4')">removeFromCart</button>
+      </div>
+  </section>
+
+  <section id="cart">
+    <h2>Shopping Cart</h2>
+    <ul id="cart-items"></ul>
+    <p>Total: Rp.<span id="cart-total">00000</span></p>
+  </section>
+
+  <script>
+    let cart = [];
+    let cartTotal = 0;
+
+    function addToCart(productName, price) {
+      cart.push({ productName, price });
+      cartTotal += price;
+
+      // Update cart display
+      updateCartDisplay();
+    }
+
+    function removeFromCart(index) {
+      const removedItem = cart.splice(index, 1)[0];
+      cartTotal -= removedItem.price;
+
+      // Update cart display
+      updateCartDisplay();
+    } 
+
+    function updateCartDisplay() {
+      const cartItemsElement = document.getElementById('cart-items');
+      const cartTotalElement = document.getElementById('cart-total');
+
+      // Clear previous items
+      cartItemsElement.innerHTML = '';
+
+      // Populate cart items
+      cart.forEach(item => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${item.productName} - $${item.price.toFixed(2)}`;
+        cartItemsElement.appendChild(listItem);
+      });
+
+      // Update total
+      cartTotalElement.textContent = cartTotal.toFixed(2);
+    }
+  </script>
+</body>
+</html>
+
